@@ -10,9 +10,23 @@
 use ComBank\Bank\Contracts\BankAccountInterface;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
-class DepositTransaction 
+// "extends BaseTransaction": recibe amount, constructor y getAmount() gratis.
+// "implements BankTransactionInterface": se compromete a cumplir el contrato.
+class DepositTransaction extends BaseTransaction implements BankTransactionInterface
 {
 
+    // Ahora pedimos la INTERFAZ, no la clase concreta: vale cualquier cuenta
+    // que cumpla el contrato de BankAccountInterface.
+    public function applyTransaction(BankAccountInterface $account): float
+    {
+        // $this->amount existe porque lo heredamos de BaseTransaction.
+        return $account->getBalance() + $this->amount;
+    }
 
-   
+        public function getTransactionInfo(): string
+    {
+        return 'DEPOSIT_TRANSACTION';
+    }
+
+
 }

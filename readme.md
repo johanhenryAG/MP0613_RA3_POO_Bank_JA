@@ -12,6 +12,10 @@
 4. Withdraw funds
 5. Display balance
 6. Close account
+7. Email validation
+8. Interest transactions
+9. Gold overdraft
+10. Transfer transactions
 
 #### Installation
 ```
