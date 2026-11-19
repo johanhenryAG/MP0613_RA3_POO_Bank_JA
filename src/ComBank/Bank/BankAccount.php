@@ -23,13 +23,9 @@ class BankAccount implements BankAccountInterface
     // Permite reutilizar las validaciones de importes y correos electrónicos.
     use AmountValidationTrait;
 
-    // El saldo puede ser negativo cuando la cuenta tiene descubierto permitido.
     private float $balance;
-    // Indica si la cuenta permite realizar operaciones.
     private string $status;
-    // Define el límite de descubierto y el interés de la cuenta.
     private OverdraftInterface $overdraft;
-    // Guarda el correo asociado a la cuenta.
     private string $email;
 
     public function __construct(float $balance, string $email = '')
@@ -43,7 +39,6 @@ class BankAccount implements BankAccountInterface
 
         $this->balance = $balance;
         $this->status = BankAccountInterface::STATUS_OPEN;
-        // Por defecto no se concede descubierto.
         $this->overdraft = new NoOverdraft();
         $this->email = $email;
     }
@@ -125,6 +120,7 @@ class BankAccount implements BankAccountInterface
                 $exception
             );
         }
+        
         $this->setBalance($newBalance);
     }
 }
